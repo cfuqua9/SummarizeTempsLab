@@ -7,70 +7,59 @@ namespace SummarizeTempsLab
     {
         static void Main(string[] args)
         {
-            string filename;
-            Console.WriteLine("Enter the filename");
-            int threshold;
-            int sumtemps = 0;
-            int numabove = 0;
-            int numbelow = 0;
-            //Write out prompt to the console
-            
-            //prompt user for the filename from console
-
-            //Test whether file exists
-            if (true)
+            string fileName;
+            Console.WriteLine("Enter Filename");
+            fileName = Console.ReadLine();
+            if (File.Exists(fileName))
             {
+                Console.WriteLine("File Exists");
+                Console.WriteLine("Enter the Threshold");
+                string input;
+                int threshold;
+                input = Console.ReadLine();
+                threshold = int.Parse(input);
 
-            }
-            else
-            {
+                int sumTemps = 0;
+                int numAbove = 0;
+                int numBelow = 0;
+                int tempCount = 0;
 
-            }
-            //If the file exists...
-            if (File.Exists(filename))
-            { Console.WriteLine("File exists");
-                Console.WriteLine("")
-
+                using(StreamReader sr = File.OpenText(fileName))
+                {
+                    string line = sr.ReadLine();
+                    int temp;
+                    while (line != null)
+                    {
+                        temp = int.Parse(line);
+                        sumTemps += temp;
+                        tempCount += 1;
+                        if (temp >= threshold)
+                        {
+                            numAbove += 1;
+                        }
+                        else
+                        {
+                            numBelow += 1;
+                        }
+                        line = sr.ReadLine();
+                    }
+                    Console.WriteLine("Temperatures above = " + numAbove);
+                    Console.WriteLine("Temperatures below = " + numBelow);
+                    int average = sumTemps / tempCount;
+                    Console.WriteLine("Average temp =" + average);
+                    using (StreamWriter sw = new StreamWriter("output.txt"))
+                    {
+                        sw.WriteLine(System.DateTime.Now.ToString());
+                        sw.WriteLine("Temperatures above = " + numAbove);
+                        sw.WriteLine("Temperatures below = " + numBelow);
+                        sw.WriteLine("Average Temperature = " + average);
+                    }
+                }
             }
             else
             {
                 Console.WriteLine("File does not exist");
-
             }
-            //ask the user to enter the temperature threshold
-
-            //Open the file and create StreamReader
-            int temp;
-            //Read a line into a string variable
-            using (StreamReader sr = File.OpenText(filename))
-            {
-                string line;
-
-                while (line !=null)
-                {
-
-
-
-
-
-                    line = StreamReader.ReadLine
-
-                }
-
-
-
-            }int average= sumtemps
-
-            //While the line is not null
-
-            //if the current temperature value >= threshold
-            if (temp >= threshold) ;
-
-            //Increment the above counter by 1
-
-            //Else (temperature is below)
-
-            //Increment the below counter by 1
         }
     }
 }
